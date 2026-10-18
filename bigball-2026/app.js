@@ -4,6 +4,21 @@ const pickRows = [...document.querySelectorAll('.pick-row')];
 const gradeCards = [...document.querySelectorAll('.grade-card')];
 const shareButton = document.querySelector('#share-button');
 const toast = document.querySelector('#toast');
+const currentLanguage = document.documentElement.lang;
+const siteRoot = new URL(document.body.dataset.siteRoot, window.location.href);
+
+for (const button of document.querySelectorAll('.language-switch button')) {
+  button.addEventListener('click', () => {
+    const language = button.dataset.lang;
+    if (language === currentLanguage) return;
+    try { window.localStorage.setItem('bigball.language', language); } catch (_) { /* URL remains the override. */ }
+    const target = new URL(language === 'de' ? 'de/' : '', siteRoot);
+    target.search = window.location.search;
+    target.searchParams.set('lang', language);
+    target.hash = window.location.hash;
+    window.location.assign(target.href);
+  });
+}
 
 function filterTeam(team) {
   teamFilter.value = team;
@@ -62,9 +77,9 @@ shareButton.addEventListener('click', async () => {
       await navigator.share(shareData);
     } else {
       await navigator.clipboard.writeText(shareData.url);
-      showToast('Link copied to clipboard');
+      showToast(toast.dataset.copied);
     }
   } catch (error) {
-    if (error.name !== 'AbortError') showToast('Use the address bar to copy this link');
+    if (error.name !== 'AbortError') showToast(toast.dataset.fallback);
   }
 });

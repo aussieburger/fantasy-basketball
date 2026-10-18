@@ -36,6 +36,10 @@ img { display: block; max-width: 100%; }
 .top-nav { display: flex; gap: clamp(20px, 2.4vw, 42px); align-items: center; margin-left: auto; }
 .top-nav a { text-decoration: none; color: #d7d9d8; font-size: 13px; font-weight: 600; transition: color .2s; }
 .top-nav a:hover { color: var(--orange); }
+.language-switch { display: inline-flex; align-items: center; flex: 0 0 auto; gap: 2px; padding: 3px; border: 1px solid rgba(255,255,255,.34); border-radius: 3px; }
+.language-switch button { min-width: 30px; height: 31px; padding: 0 5px; border: 0; border-radius: 2px; background: transparent; color: #d7d9d8; font: 800 13px var(--display); letter-spacing: .04em; cursor: pointer; }
+.language-switch button[aria-pressed="true"] { background: var(--orange); color: var(--ink); }
+.language-switch button:not([aria-pressed="true"]):hover { color: var(--orange); }
 .share-button { flex: 0 0 auto; min-height: 39px; padding: 0 16px; border: 1px solid rgba(255,255,255,.34); border-radius: 3px; background: transparent; color: #fff; font: 700 13px var(--display); letter-spacing: .13em; cursor: pointer; transition: background .2s, color .2s; }
 .share-button:hover { background: var(--orange); color: var(--ink); }
 .share-button span { font: 17px var(--body); margin-left: 13px; }
@@ -196,6 +200,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 820px) {
   .site-header { height: 66px; }
   .top-nav { display: none; }
+  .language-switch { margin-left: auto; }
   .hero-inner { min-height: 650px; grid-template-columns: 1fr; align-items: start; padding-top: 55px; padding-bottom: 0; }
   .hero-copy { z-index: 4; }
   .hero h1 { font-size: clamp(74px, 14vw, 118px); }
@@ -222,10 +227,12 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 580px) {
-  .brand { min-width: 0; font-size: 26px; }
+  .site-header { gap: 9px; padding-left: 16px; padding-right: 16px; }
+  .brand { min-width: 0; font-size: 23px; }
   .brand small { font-size: 8px; }
   .brand-ball { width: 23px; height: 23px; }
-  .share-button { padding: 0 10px; font-size: 12px; }
+  .language-switch button { min-width: 27px; height: 29px; font-size: 12px; }
+  .share-button { min-height: 35px; padding: 0 8px; font-size: 11px; }
   .share-button span { margin-left: 5px; }
   .hero-inner { min-height: 690px; padding-top: 42px; }
   .hero h1 { max-width: 390px; font-size: clamp(65px, 15vw, 92px); }
